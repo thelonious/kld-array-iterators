@@ -24,5 +24,5 @@ while (iter.hasNext()) {
     var value = iter.next();
     var flattened = flatten(value).join('');
 
-    console.log("%d: %s", count++, flattened);
+    console.log("%d: %s", ++count, flattened);
 }

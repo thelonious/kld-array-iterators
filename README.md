@@ -227,7 +227,7 @@ Group Iterator
         var value = iter.next();
         var flattened = flatten(value).join("");
 
-        console.log("%d: %s", count++, flattened);
+        console.log("%d: %s", ++count, flattened);
     }
 
 Output:
@@ -275,7 +275,7 @@ Generate Floats
         var value = iter.next();
         var flattened = flatten(value).join('');
 
-        console.log("%d: %s", count++, flattened);
+        console.log("%d: %s", ++count, flattened);
     }
 
 Output:
