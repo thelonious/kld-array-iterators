@@ -5,6 +5,7 @@ var ArrayIterator = require('kld-array-iterators').ArrayIterator,
     SequenceIterator = require('kld-array-iterators').SequenceIterator,
     flatten = require('./flatten');
 
+var count = 0;
 var iter = new GroupIterator(
     new ArrayIterator('', '-', '+'),
     new ArrayIterator('1', '2'),
@@ -18,13 +19,10 @@ var iter = new GroupIterator(
         )
     )
 );
-var count = 0;
 
 while (iter.hasNext()) {
-    count++;
-
     var value = iter.next();
     var flattened = flatten(value).join('');
 
-    console.log("%d: %s", count, flattened);
+    console.log("%d: %s", count++, flattened);
 }

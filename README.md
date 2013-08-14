@@ -1,13 +1,22 @@
 kld-array-iterators
 ===================
 
-This module is a collection of classes used to iterate over arrays. Iterators include:
+This module is a collection of classes used to iterate over arrays. The provided iterator types are listed below.
+
+Atomic Iterators
+----------------
+These iterators work directly with the content of a list of arguments or the elements of an array.
 
 * Array Iterator - a simple in-order walk of the provided args or array
 * Reverse Iterator - a reverse walk of the provided args or array
 * Random Iterator - a random walk of the provided args or array. All items are visited once and only once
 * Combination Iterator - a walk of all of the subsets of the provided args or array
 * Permutation Iterator - a walk of all permutations of the provided args or array
+
+Composite Iterators
+-------------------
+These iterators allow composition of other iterators. Iterators are provided in the list of aruments or as the elements of an array.
+
 * Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator is visited in order and run to exhaustion
 * Group Iterator - iterator over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
 
@@ -205,6 +214,7 @@ Group Iterator
         GroupIterator = require('kld-array-iterators').GroupIterator,
         flatten = require('./flatten.js');
 
+    var count = 0;
     var iter = new GroupIterator(
         new ArrayIterator(1, 2),
         new CombinationIterator('a','b', 'c'),
@@ -212,14 +222,12 @@ Group Iterator
         new RandomIterator(4, 5, 6),
         new ReverseIterator('d','e')
     );
-    var count = 0;
 
     while (iter.hasNext()) {
         var value = iter.next();
         var flattened = flatten(value).join("");
-        count++;
 
-        console.log("%d: %s", count, flattened);
+        console.log("%d: %s", count++, flattened);
     }
 
 Output:
@@ -248,11 +256,7 @@ Output:
 
 Generate Floats
 ---------------
-    var ArrayIterator = require('kld-array-iterators').ArrayIterator,
-        GroupIterator = require('kld-array-iterators').GroupIterator,
-        SequenceIterator = require('kld-array-iterators').SequenceIterator,
-        flatten = require('./flatten');
-
+    var count = 0;
     var iter = new GroupIterator(
         new ArrayIterator('', '-', '+'),
         new ArrayIterator('1', '2'),
@@ -266,15 +270,12 @@ Generate Floats
             )
         )
     );
-    var count = 0;
 
     while (iter.hasNext()) {
-        count++;
-
         var value = iter.next();
         var flattened = flatten(value).join('');
 
-        console.log("%d: %s", count, flattened);
+        console.log("%d: %s", count++, flattened);
     }
 
 Output:
