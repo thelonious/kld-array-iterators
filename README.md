@@ -18,7 +18,7 @@ At a minimum, an iterator must implement the following methods.
 * hasNext - returns true if calling "next" will return a value
 * next - returns the next value from the iterator or null if the iterator has been exhausted
 * reset - reset the iterator allowing it to provide all of its values again
-* forEach(callback) - invokes the specified callback for each item in the iterator. The callback receives a single argument; the current value of the interator.
+* forEach(callback) - invokes the specified callback for each item in the iterator. The callback receives a single argument; the current value of the iterator.
 
 Atomic Iterators
 ----------------
