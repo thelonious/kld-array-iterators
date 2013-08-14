@@ -30,6 +30,7 @@ Array Iterator
     }
 
 Output:
+```
     1
     2
     3
@@ -40,6 +41,7 @@ Output:
     8
     9
     10
+```
 
 Reverse Iterator
 ----------------
@@ -52,6 +54,7 @@ Reverse Iterator
     }
 
 Output:
+```
     10
     9
     8
@@ -62,6 +65,7 @@ Output:
     3
     2
     1
+```
 
 Random Iterator
 ---------------
@@ -74,6 +78,7 @@ Random Iterator
     }
 
 Output:
+```
     10
     6
     7
@@ -84,6 +89,7 @@ Output:
     9
     2
     4
+```
 
 Combination Iterator
 --------------------
@@ -96,6 +102,7 @@ Combination Iterator
     }
 
 Output:
+```
     [ 1 ]
     [ 2 ]
     [ 1, 2 ]
@@ -111,6 +118,7 @@ Output:
     [ 1, 3, 4 ]
     [ 2, 3, 4 ]
     [ 1, 2, 3, 4 ]
+```
 
 Permutation Iterator
 --------------------
@@ -123,6 +131,7 @@ Permutation Iterator
     }
 
 Output:
+```
     [ 1, 2, 3, 4 ]
     [ 1, 2, 4, 3 ]
     [ 1, 3, 2, 4 ]
@@ -147,6 +156,7 @@ Output:
     [ 4, 2, 3, 1 ]
     [ 3, 4, 2, 1 ]
     [ 4, 3, 2, 1 ]
+```
 
 Sequence Iterator
 -----------------
@@ -163,6 +173,7 @@ Sequence Iterator
     }
 
 Output:
+```
     1
     2
     3
@@ -182,6 +193,7 @@ Output:
     g
     h
     i
+```
 
 Group Iterator
 --------------
@@ -211,6 +223,7 @@ Group Iterator
     }
 
 Output:
+```
     1: 1aXYZ5e
     2: 2aXYZ5e
     3: 1bXYZ5e
@@ -231,6 +244,7 @@ Output:
     502: 2bcZYX4d
     503: 1abcZYX4d
     504: 2abcZYX4d
+```
 
 Generate Floats
 ---------------
@@ -264,6 +278,7 @@ Generate Floats
     }
 
 Output:
+```
     1: 1
     2: -1
     3: +1
@@ -284,3 +299,4 @@ Output:
     568: 2.003E+300
     569: -2.003E+300
     570: +2.003E+300
+```
