@@ -1,4 +1,4 @@
-var Iterator = require('../lib/ArrayIterator');
+var Iterator = require('../lib/Iterator');
 
 exports.testNothing = function(beforeExit, assert) {
     var iter = new Iterator();

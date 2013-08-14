@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
-var ArrayIterator = require('kld-array-iterators').ArrayIterator,
-    GroupIterator = require('kld-array-iterators').GroupIterator,
+var Iterator = require('kld-array-iterators').Iterator,
+    CrossProductIterator = require('kld-array-iterators').CrossProductIterator,
     SequenceIterator = require('kld-array-iterators').SequenceIterator,
     flatten = require('./flatten');
 
 var count = 0;
-var iter = new GroupIterator(
-    new ArrayIterator('', '-', '+'),
-    new ArrayIterator('1', '2'),
-    new ArrayIterator('', '.0', '.1', '.02', '.003'),
+var iter = new CrossProductIterator(
+    new Iterator('', '-', '+'),
+    new Iterator('1', '2'),
+    new Iterator('', '.0', '.1', '.02', '.003'),
     new SequenceIterator(
-        new ArrayIterator(''),
-        new GroupIterator(
-            new ArrayIterator('e', 'E'),
-            new ArrayIterator('', '-', '+'),
-            new ArrayIterator('1', '2', '300')
+        new Iterator(''),
+        new CrossProductIterator(
+            new Iterator('e', 'E'),
+            new Iterator('', '-', '+'),
+            new Iterator('1', '2', '300')
         )
     )
 );

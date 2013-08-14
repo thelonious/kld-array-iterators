@@ -1,33 +1,31 @@
-var ArrayIterator = require('../lib/ArrayIterator'),
-    CombinationIterator = require('../lib/CombinationIterator'),
+var Iterator = require('../lib/Iterator'),
+    SubsetIterator = require('../lib/SubsetIterator'),
     PermutationIterator = require('../lib/PermutationIterator'),
-    Iterator = require('../lib/SequenceIterator');
+    SequenceIterator = require('../lib/SequenceIterator');
 
 exports.testNothing = function(beforeExit, assert) {
-    var iter = new Iterator();
+    var iter = new SequenceIterator();
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testEmptyArray = function(beforeExit, assert) {
-    var iter = new Iterator([]);
+    var iter = new SequenceIterator([]);
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
-exports.testSingleEmptyArrayIterator = function(beforeExit, assert) {
-    var arrayIterator = new ArrayIterator();
-    var iter = new Iterator(arrayIterator);
+exports.testSingleEmptyIterator = function(beforeExit, assert) {
+    var iter = new SequenceIterator(new Iterator());
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
-exports.testSingleItemArrayIterator = function(beforeExit, assert) {
-    var arrayIterator = new ArrayIterator(1);
-    var iter = new Iterator(arrayIterator);
+exports.testSingleItemIterator = function(beforeExit, assert) {
+    var iter = new SequenceIterator(new Iterator(1));
 
     assert.equal(true, iter.hasNext());
     assert.eql(1, iter.next());
@@ -36,9 +34,8 @@ exports.testSingleItemArrayIterator = function(beforeExit, assert) {
     assert.equal(null, iter.next());
 };
 
-exports.testMultiItemArrayIterator = function(beforeExit, assert) {
-    var arrayIterator = new ArrayIterator(1, 2, 3);
-    var iter = new Iterator(arrayIterator);
+exports.testMultiItemIterator = function(beforeExit, assert) {
+    var iter = new SequenceIterator(new Iterator(1, 2, 3));
 
     assert.equal(true, iter.hasNext());
     assert.eql(1, iter.next());
@@ -54,10 +51,11 @@ exports.testMultiItemArrayIterator = function(beforeExit, assert) {
 };
 
 exports.testMultipleIterators = function(beforeExit, assert) {
-    var iter1 = new ArrayIterator(1, 2, 3);
-    var iter2 = new CombinationIterator('a', 'b', 'c');
-    var iter3 = new PermutationIterator('X', 'Y', 'Z');
-    var iter = new Iterator(iter1, iter2, iter3);
+    var iter = new SequenceIterator(
+        new Iterator(1, 2, 3),
+        new SubsetIterator('a', 'b', 'c'),
+        new PermutationIterator('X', 'Y', 'Z')
+    );
 
     var expectedValues = [
         1,

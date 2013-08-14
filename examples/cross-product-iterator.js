@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-var ArrayIterator = require('kld-array-iterators').ArrayIterator,
-    CombinationIterator = require('kld-array-iterators').CombinationIterator,
+var Iterator = require('kld-array-iterators').Iterator,
+    SubsetIterator = require('kld-array-iterators').SubsetIterator,
     PermutationIterator = require('kld-array-iterators').PermutationIterator,
     RandomIterator = require('kld-array-iterators').RandomIterator,
     ReverseIterator = require('kld-array-iterators').ReverseIterator,
-    GroupIterator = require('kld-array-iterators').GroupIterator,
+    CrossProductIterator = require('kld-array-iterators').CrossProductIterator,
     flatten = require('./flatten.js');
 
 var count = 0;
-var iter = new GroupIterator(
-    new ArrayIterator(1, 2),
-    new CombinationIterator('a','b', 'c'),
+var iter = new CrossProductIterator(
+    new Iterator(1, 2),
+    new SubsetIterator('a','b', 'c'),
     new PermutationIterator('X', 'Y','Z'),
     new RandomIterator(4, 5, 6),
     new ReverseIterator('d','e')

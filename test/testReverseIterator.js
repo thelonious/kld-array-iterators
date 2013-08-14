@@ -1,21 +1,21 @@
-var Iterator = require('../lib/ReverseIterator');
+var ReverseIterator = require('../lib/ReverseIterator');
 
 exports.testNothing = function(beforeExit, assert) {
-    var iter = new Iterator();
+    var iter = new ReverseIterator();
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testEmptyArray = function(beforeExit, assert) {
-    var iter = new Iterator([]);
+    var iter = new ReverseIterator([]);
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testSingleItem = function(beforeExit, assert) {
-    var iter = new Iterator(1);
+    var iter = new ReverseIterator(1);
 
     assert.equal(true, iter.hasNext());
     assert.equal(1, iter.next());
@@ -25,7 +25,7 @@ exports.testSingleItem = function(beforeExit, assert) {
 };
 
 exports.testMultipleItems = function(beforeExit, assert) {
-    var iter = new Iterator(1, 2, 3);
+    var iter = new ReverseIterator(1, 2, 3);
 
     assert.equal(true, iter.hasNext());
     assert.equal(3, iter.next());
@@ -41,7 +41,7 @@ exports.testMultipleItems = function(beforeExit, assert) {
 };
 
 exports.testMultiItemArray = function(beforeExit, assert) {
-    var iter = new Iterator([1, 2, 3]);
+    var iter = new ReverseIterator([1, 2, 3]);
 
     assert.equal(true, iter.hasNext());
     assert.equal(3, iter.next());

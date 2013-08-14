@@ -1,21 +1,21 @@
-var Iterator = require('../lib/RandomIterator');
+var RandomIterator = require('../lib/RandomIterator');
 
 exports.testNothing = function(beforeExit, assert) {
-    var iter = new Iterator();
+    var iter = new RandomIterator();
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testEmptyArray = function(beforeExit, assert) {
-    var iter = new Iterator([]);
+    var iter = new RandomIterator([]);
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testSingleItem = function(beforeExit, assert) {
-    var iter = new Iterator(1);
+    var iter = new RandomIterator(1);
 
     assert.equal(true, iter.hasNext());
     assert.equal(1, iter.next());
@@ -26,7 +26,7 @@ exports.testSingleItem = function(beforeExit, assert) {
 
 exports.testMultiItemArray = function(beforeExit, assert) {
     var items = [1, 2, 3, 4, 5];
-    var iter = new Iterator(items);
+    var iter = new RandomIterator(items);
     var visited = [];
 
     for (var i = 0; i < items.length; i++) {

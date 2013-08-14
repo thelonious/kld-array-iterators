@@ -1,24 +1,24 @@
 kld-array-iterators
 ===================
 
-This module is a collection of classes used to iterate over arrays. The provided iterator types are listed below.
+This module is a collection of classes used to iterate over arrays in various ways. The provided iterator types are listed below.
 
 Atomic Iterators
 ----------------
 These iterators work directly with the content of a list of arguments or the elements of an array.
 
-* Array Iterator - a simple in-order walk of the provided args or array
+* Iterator - a simple in-order walk of the provided args or array
 * Reverse Iterator - a reverse walk of the provided args or array
 * Random Iterator - a random walk of the provided args or array. All items are visited once and only once
-* Combination Iterator - a walk of all of the subsets of the provided args or array
+* Subset Iterator - a walk of all of the non-empty subsets of the provided args or array
 * Permutation Iterator - a walk of all permutations of the provided args or array
 
 Composite Iterators
 -------------------
 These iterators allow composition of other iterators. Iterators are provided in the list of aruments or as the elements of an array.
 
-* Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator is visited in order and run to exhaustion
-* Group Iterator - iterator over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
+* Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator run to exhaustion before advancing to the next in the list.
+* Cross Product Iterator - iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
 
 Installation
 ============
@@ -28,9 +28,9 @@ Examples
 ========
 The following are some examples of each iterator in use. You can find the full source for these under the "examples" folder.
 
-Array Iterator
---------------
-    var iter = new ArrayIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+Iterator
+--------
+    var iter = new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -94,9 +94,9 @@ Output:
 4
 ```
 
-Combination Iterator
---------------------
-    var iter = new CombinationIterator(1, 2, 3, 4);
+Subset Iterator
+---------------
+    var iter = new SubsetIterator(1, 2, 3, 4);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -160,8 +160,8 @@ Output:
 Sequence Iterator
 -----------------
     var iter = new SequenceIterator(
-        new ArrayIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
-        new ArrayIterator('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
+        new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+        new Iterator('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
     );
 
     while (iter.hasNext()) {
@@ -191,12 +191,12 @@ h
 i
 ```
 
-Group Iterator
---------------
+Cross Product Iterator
+----------------------
     var count = 0;
-    var iter = new GroupIterator(
-        new ArrayIterator(1, 2),
-        new CombinationIterator('a','b', 'c'),
+    var iter = new CrossProductIterator(
+        new Iterator(1, 2),
+        new SubsetIterator('a','b', 'c'),
         new PermutationIterator('X', 'Y','Z'),
         new RandomIterator(4, 5, 6),
         new ReverseIterator('d','e')
@@ -236,16 +236,16 @@ Output:
 Generate Floats
 ---------------
     var count = 0;
-    var iter = new GroupIterator(
-        new ArrayIterator('', '-', '+'),
-        new ArrayIterator('1', '2'),
-        new ArrayIterator('', '.0', '.1', '.02', '.003'),
+    var iter = new CrossProductIterator(
+        new Iterator('', '-', '+'),
+        new Iterator('1', '2'),
+        new Iterator('', '.0', '.1', '.02', '.003'),
         new SequenceIterator(
-            new ArrayIterator(''),
-            new GroupIterator(
-                new ArrayIterator('e', 'E'),
-                new ArrayIterator('', '-', '+'),
-                new ArrayIterator('1', '2', '300')
+            new Iterator(''),
+            new CrossProductIterator(
+                new Iterator('e', 'E'),
+                new Iterator('', '-', '+'),
+                new Iterator('1', '2', '300')
             )
         )
     );

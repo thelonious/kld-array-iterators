@@ -1,21 +1,21 @@
-var Iterator = require('../lib/PermutationIterator');
+var PermutationIterator = require('../lib/PermutationIterator');
 
 exports.testNothing = function(beforeExit, assert) {
-    var iter = new Iterator();
+    var iter = new PermutationIterator();
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testEmptyArray = function(beforeExit, assert) {
-    var iter = new Iterator([]);
+    var iter = new PermutationIterator([]);
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
 exports.testSingleItem = function(beforeExit, assert) {
-    var iter = new Iterator(1);
+    var iter = new PermutationIterator(1);
 
     assert.equal(true, iter.hasNext());
     assert.equal(1, iter.next());
@@ -25,7 +25,7 @@ exports.testSingleItem = function(beforeExit, assert) {
 };
 
 exports.testMultipleItems = function(beforeExit, assert) {
-    var iter = new Iterator(1, 2, 3);
+    var iter = new PermutationIterator(1, 2, 3);
 
     assert.equal(true, iter.hasNext());
     assert.eql([1,2,3], iter.next());
@@ -50,7 +50,7 @@ exports.testMultipleItems = function(beforeExit, assert) {
 };
 
 exports.testMultiItemArray = function(beforeExit, assert) {
-    var iter = new Iterator([1, 2, 3]);
+    var iter = new PermutationIterator([1, 2, 3]);
 
     assert.equal(true, iter.hasNext());
     assert.eql([1,2,3], iter.next());
