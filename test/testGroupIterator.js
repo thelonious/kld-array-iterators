@@ -11,7 +11,7 @@ exports.testNoArray = function(beforeExit, assert) {
 };
 
 exports.testSingleEmptyArrayIterator = function(beforeExit, assert) {
-    var arrayIterator = new ArrayIterator([]);
+    var arrayIterator = new ArrayIterator();
     var iter = new Iterator(arrayIterator);
 
     assert.equal(false, iter.hasNext());
@@ -19,7 +19,7 @@ exports.testSingleEmptyArrayIterator = function(beforeExit, assert) {
 };
 
 exports.testSingleItemArrayIterator = function(beforeExit, assert) {
-    var arrayIterator = new ArrayIterator([1]);
+    var arrayIterator = new ArrayIterator(1);
     var iter = new Iterator(arrayIterator);
 
     assert.equal(true, iter.hasNext());
@@ -30,7 +30,7 @@ exports.testSingleItemArrayIterator = function(beforeExit, assert) {
 };
 
 exports.testMultiItemArrayIterator = function(beforeExit, assert) {
-    var arrayIterator = new ArrayIterator([1, 2, 3]);
+    var arrayIterator = new ArrayIterator(1, 2, 3);
     var iter = new Iterator(arrayIterator);
 
     assert.equal(true, iter.hasNext());
@@ -47,9 +47,9 @@ exports.testMultiItemArrayIterator = function(beforeExit, assert) {
 };
 
 exports.testMultipleIterators = function(beforeExit, assert) {
-    var iter1 = new ArrayIterator([1, 2, 3]);
-    var iter2 = new CombinationIterator(['a', 'b', 'c']);
-    var iter3 = new PermutationIterator(['X', 'Y']);
+    var iter1 = new ArrayIterator(1, 2, 3);
+    var iter2 = new CombinationIterator('a', 'b', 'c');
+    var iter3 = new PermutationIterator('X', 'Y');
     var iter = new Iterator(iter1, iter2, iter3);
 
     var expectedValues = [

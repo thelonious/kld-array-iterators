@@ -1,21 +1,14 @@
 var Iterator = require('../lib/PermutationIterator');
 
-exports.testNoArray = function(beforeExit, assert) {
+exports.testEmptyArray = function(beforeExit, assert) {
     var iter = new Iterator();
 
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
 
-exports.testEmptyArray = function(beforeExit, assert) {
-    var iter = new Iterator([]);
-
-    assert.equal(false, iter.hasNext());
-    assert.equal(null, iter.next());
-};
-
 exports.testSingleItemArray = function(beforeExit, assert) {
-    var iter = new Iterator([1]);
+    var iter = new Iterator(1);
 
     assert.equal(true, iter.hasNext());
     assert.equal(1, iter.next());
@@ -25,7 +18,7 @@ exports.testSingleItemArray = function(beforeExit, assert) {
 };
 
 exports.testMultiItemArray = function(beforeExit, assert) {
-    var iter = new Iterator([1, 2, 3]);
+    var iter = new Iterator(1, 2, 3);
 
     assert.equal(true, iter.hasNext());
     assert.eql([1,2,3], iter.next());
