@@ -8,13 +8,13 @@ var ArrayIterator = require('kld-array-iterators').ArrayIterator,
     GroupIterator = require('kld-array-iterators').GroupIterator,
     flatten = require('./flatten.js');
 
-var iter1 = new ArrayIterator(1, 2);
-var iter2 = new CombinationIterator('a','b', 'c');
-var iter3 = new PermutationIterator('X', 'Y','Z');
-var iter4 = new RandomIterator(4, 5, 6);
-var iter5 = new ReverseIterator('d','e');
-
-var iter = new GroupIterator(iter1, iter2, iter3, iter4, iter5);
+var iter = new GroupIterator(
+    new ArrayIterator(1, 2),
+    new CombinationIterator('a','b', 'c'),
+    new PermutationIterator('X', 'Y','Z'),
+    new RandomIterator(4, 5, 6),
+    new ReverseIterator('d','e')
+);
 var count = 0;
 
 while (iter.hasNext()) {
