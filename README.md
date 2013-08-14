@@ -13,6 +13,8 @@ Iterators implement a very simple API and they can be broken into two groups. Th
 
 API
 ---
+At a minimum, an iterator must implement the following methods.
+
 * hasNext - returns true if calling "next" will return a value
 * next - returns the next value from the iterator or null if the iterator has been exhausted
 * reset - reset the iterator allowing it to provide all of its values again
