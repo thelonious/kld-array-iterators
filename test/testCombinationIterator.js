@@ -1,5 +1,12 @@
 var Iterator = require('../lib/CombinationIterator');
 
+exports.testNothing = function(beforeExit, assert) {
+    var iter = new Iterator();
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
+
 exports.testEmptyArray = function(beforeExit, assert) {
     var iter = new Iterator();
 
@@ -7,7 +14,7 @@ exports.testEmptyArray = function(beforeExit, assert) {
     assert.equal(null, iter.next());
 };
 
-exports.testSingleItemArray = function(beforeExit, assert) {
+exports.testSingleItem = function(beforeExit, assert) {
     var iter = new Iterator(1);
 
     assert.equal(true, iter.hasNext());
@@ -17,8 +24,36 @@ exports.testSingleItemArray = function(beforeExit, assert) {
     assert.equal(null, iter.next());
 };
 
-exports.testMultiItemArray = function(beforeExit, assert) {
+exports.testMultipleItems = function(beforeExit, assert) {
     var iter = new Iterator(1, 2, 3);
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([2], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1,2], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([3], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1,3], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([2,3], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1,2,3], iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
+
+exports.testMultiItemArray = function(beforeExit, assert) {
+    var iter = new Iterator([1, 2, 3]);
 
     assert.equal(true, iter.hasNext());
     assert.eql([1], iter.next());
