@@ -26,7 +26,7 @@ These iterators work directly with the content of a list of arguments or the ele
 
 * Iterator - a simple in-order walk of the provided args or array
 * Reverse Iterator - a reverse walk of the provided args or array
-* Random Iterator - a random walk of the provided args or array. All items are visited once and only once
+* Random Iterator - a random walk of the provided args or array. All items are visited once and only once. The order is preserved between calls to "reset". The items can be randomized again by calling "shuffle". "reset" should be called after calling "shuffle".
 * Subset Iterator - a walk of all of the non-empty subsets of the provided args or array
 * Permutation Iterator - a walk of all permutations of the provided args or array
 
