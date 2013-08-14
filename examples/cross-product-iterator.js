@@ -11,10 +11,10 @@ var Iterator = require('kld-array-iterators').Iterator,
 var count = 0;
 var iter = new CrossProductIterator(
     new Iterator(1, 2),
-    new SubsetIterator('a','b', 'c'),
-    new PermutationIterator('X', 'Y','Z'),
+    new SubsetIterator('a', 'b',' c'),
+    new PermutationIterator('X',' Y', 'Z'),
     new RandomIterator(4, 5, 6),
-    new ReverseIterator('d','e')
+    new ReverseIterator('d', 'e')
 );
 
 while (iter.hasNext()) {
