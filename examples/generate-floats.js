@@ -6,7 +6,8 @@ var Iterator = require('kld-array-iterators').Iterator,
     flatten = require('./flatten');
 
 var count = 0;
-var iter = new CrossProductIterator(
+
+new CrossProductIterator(
     new Iterator('', '-', '+'),
     new Iterator('1', '2'),
     new Iterator('', '.0', '.1', '.02', '.003'),

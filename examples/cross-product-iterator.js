@@ -9,7 +9,8 @@ var Iterator = require('kld-array-iterators').Iterator,
     flatten = require('./flatten.js');
 
 var count = 0;
-var iter = new CrossProductIterator(
+
+new CrossProductIterator(
     new Iterator(1, 2),
     new SubsetIterator('a', 'b', 'c'),
     new PermutationIterator('X', 'Y', 'Z'),

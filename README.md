@@ -109,7 +109,7 @@ Output:
 
 Subset Iterator
 ---------------
-    var iter = new SubsetIterator(1, 2, 3, 4).forEach(function(value) {
+    new SubsetIterator(1, 2, 3, 4).forEach(function(value) {
         console.log(value);
     });
 
@@ -134,7 +134,7 @@ Output:
 
 Permutation Iterator
 --------------------
-    var iter = new PermutationIterator(1, 2, 3, 4).forEach(function(value) {
+    new PermutationIterator(1, 2, 3, 4).forEach(function(value) {
         console.log(value);
     });
 
@@ -168,7 +168,7 @@ Output:
 
 Sequence Iterator
 -----------------
-    var iter = new SequenceIterator(
+    new SequenceIterator(
         new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
         new Iterator('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
     ).forEach(function(value) {
@@ -201,7 +201,8 @@ i
 Cross Product Iterator
 ----------------------
     var count = 0;
-    var iter = new CrossProductIterator(
+
+    new CrossProductIterator(
         new Iterator(1, 2),
         new SubsetIterator('a', 'b', 'c'),
         new PermutationIterator('X', 'Y', 'Z'),
@@ -238,7 +239,8 @@ Output:
 Generate Floats
 ---------------
     var count = 0;
-    var iter = new CrossProductIterator(
+
+    new CrossProductIterator(
         new Iterator('', '-', '+'),
         new Iterator('1', '2'),
         new Iterator('', '.0', '.1', '.02', '.003'),
