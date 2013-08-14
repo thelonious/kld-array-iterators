@@ -32,7 +32,7 @@ Composite Iterators
 -------------------
 These iterators allow composition of other iterators. Iterators are provided in the list of aruments or as the elements of an array.
 
-* Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator run to exhaustion before advancing to the next in the list.
+* Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator is run to exhaustion before advancing to the next in the list.
 * Cross Product Iterator - iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
 
 Examples
