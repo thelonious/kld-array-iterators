@@ -1,7 +1,22 @@
 kld-array-iterators
 ===================
 
-This module is a collection of classes used to iterate over arrays in various ways. The provided iterator types are listed below.
+This module is a collection of classes used to iterate over arrays in various ways.
+
+Installation
+============
+    npm install kld-array-iterators
+
+Iterators
+=========
+Iterators implement a very simple API and they can be broken into two groups. This is detailed below.
+
+API
+---
+* hasNext - returns true if calling "next" will return a value
+* next - returns the next value from the iterator or null if the iterator has been exhausted
+* reset - reset the iterator allowing it to provide all of its values again
+* forEach(callback) - invokes the specified for each item in the iterator
 
 Atomic Iterators
 ----------------
@@ -19,10 +34,6 @@ These iterators allow composition of other iterators. Iterators are provided in 
 
 * Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator run to exhaustion before advancing to the next in the list.
 * Cross Product Iterator - iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
-
-Installation
-============
-    npm install kld-array-iterators
 
 Examples
 ========
@@ -96,11 +107,9 @@ Output:
 
 Subset Iterator
 ---------------
-    var iter = new SubsetIterator(1, 2, 3, 4);
-
-    while (iter.hasNext()) {
-        console.log(iter.next());
-    }
+    var iter = new SubsetIterator(1, 2, 3, 4).forEach(function(value) {
+        console.log(value);
+    });
 
 Output:
 ```
@@ -123,11 +132,9 @@ Output:
 
 Permutation Iterator
 --------------------
-    var iter = new PermutationIterator(1, 2, 3, 4);
-
-    while (iter.hasNext()) {
-        console.log(iter.next());
-    }
+    var iter = new PermutationIterator(1, 2, 3, 4).forEach(function(value) {
+        console.log(value);
+    });
 
 Output:
 ```
@@ -162,11 +169,9 @@ Sequence Iterator
     var iter = new SequenceIterator(
         new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
         new Iterator('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
-    );
-
-    while (iter.hasNext()) {
-        console.log(iter.next());
-    }
+    ).forEach(function(value) {
+        console.log(value);
+    });
 
 Output:
 ```
@@ -200,14 +205,9 @@ Cross Product Iterator
         new PermutationIterator('X', 'Y', 'Z'),
         new RandomIterator(4, 5, 6),
         new ReverseIterator('d', 'e')
-    );
-
-    while (iter.hasNext()) {
-        var value = iter.next();
-        var flattened = flatten(value).join("");
-
-        console.log("%d: %s", ++count, flattened);
-    }
+    ).forEach(function(value) {
+        console.log("%d: %s", ++count, flatten(value).join(""));
+    });
 
 Output:
 ```
@@ -248,14 +248,9 @@ Generate Floats
                 new Iterator('1', '2', '300')
             )
         )
-    );
-
-    while (iter.hasNext()) {
-        var value = iter.next();
-        var flattened = flatten(value).join('');
-
-        console.log("%d: %s", ++count, flattened);
-    }
+    ).forEach(function(value) {
+        console.log("%d: %s", ++count, flatten(value).join(''));
+    });
 
 Output:
 ```

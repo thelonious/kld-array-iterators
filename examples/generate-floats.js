@@ -18,11 +18,6 @@ var iter = new CrossProductIterator(
             new Iterator('1', '2', '300')
         )
     )
-);
-
-while (iter.hasNext()) {
-    var value = iter.next();
-    var flattened = flatten(value).join('');
-
-    console.log("%d: %s", ++count, flattened);
-}
+).forEach(function(value) {
+    console.log("%d: %s", ++count, flatten(value).join(''));
+});
