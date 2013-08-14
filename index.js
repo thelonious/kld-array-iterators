@@ -1,8 +1,8 @@
 // expose classes
 
-exports.ArrayIterator = ArrayIterator;
-exports.ReverseIterator = ReverseIterator;
-exports.CombinationIterator = CombinationIterator;
-exports.PermutationIterator = PermutationIterator;
-exports.RandomIterator = RandomIterator;
-exports.GroupIterator = GroupIterator;
+exports.ArrayIterator = require('./lib/ArrayIterator');
+exports.ReverseIterator = require('./lib/ReverseIterator');
+exports.CombinationIterator = require('./lib/CombinationIterator');
+exports.PermutationIterator = require('./lib/PermutationIterator');
+exports.RandomIterator = require('./lib/RandomIterator');
+exports.GroupIterator = require('./lib/GroupIterator');
