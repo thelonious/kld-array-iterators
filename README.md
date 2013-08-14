@@ -30,9 +30,7 @@ The following are some examples of each iterator in use. You can find the full s
 
 Array Iterator
 --------------
-    var Iterator = require('kld-array-iterators').ArrayIterator;
-
-    var iter = new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    var iter = new ArrayIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -54,9 +52,7 @@ Output:
 
 Reverse Iterator
 ----------------
-    var Iterator = require('kld-array-iterators').ReverseIterator;
-
-    var iter = new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    var iter = new ReverseIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -78,9 +74,7 @@ Output:
 
 Random Iterator
 ---------------
-    var Iterator = require('kld-array-iterators').RandomIterator;
-
-    var iter = new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    var iter = new RandomIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -102,9 +96,7 @@ Output:
 
 Combination Iterator
 --------------------
-    var Iterator = require('kld-array-iterators').CombinationIterator;
-
-    var iter = new Iterator(1, 2, 3, 4);
+    var iter = new CombinationIterator(1, 2, 3, 4);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -131,9 +123,7 @@ Output:
 
 Permutation Iterator
 --------------------
-    var Iterator = require('kld-array-iterators').PermutationIterator;
-
-    var iter = new Iterator(1, 2, 3, 4);
+    var iter = new PermutationIterator(1, 2, 3, 4);
 
     while (iter.hasNext()) {
         console.log(iter.next());
@@ -169,9 +159,6 @@ Output:
 
 Sequence Iterator
 -----------------
-    var ArrayIterator = require('kld-array-iterators').ArrayIterator,
-        SequenceIterator = require('kld-array-iterators').SequenceIterator;
-
     var iter = new SequenceIterator(
         new ArrayIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
         new ArrayIterator('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
@@ -206,14 +193,6 @@ i
 
 Group Iterator
 --------------
-    var ArrayIterator = require('kld-array-iterators').ArrayIterator,
-        CombinationIterator = require('kld-array-iterators').CombinationIterator,
-        PermutationIterator = require('kld-array-iterators').PermutationIterator,
-        RandomIterator = require('kld-array-iterators').RandomIterator,
-        ReverseIterator = require('kld-array-iterators').ReverseIterator,
-        GroupIterator = require('kld-array-iterators').GroupIterator,
-        flatten = require('./flatten.js');
-
     var count = 0;
     var iter = new GroupIterator(
         new ArrayIterator(1, 2),
