@@ -1,7 +1,15 @@
 kld-array-iterators
 ===================
 
-This module is a  collection of classes used to iterate over arrays
+This module is a collection of classes used to iterate over arrays. Iterators include:
+
+* Array Iterator - a simple in-order walk of the provided args or array
+* Reverse Iterator - a reverse walk of the provided args or array
+* Random Iterator - a random walk of the provided args or array. All items are visited once and only once
+* Combination Iterator - a walk of all of the subsets of the provided args or array
+* Permutation Iterator - a walk of all permutations of the provided args or array
+* Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator is visited in order and run to exhaustion
+* Group Iterator - iterator over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
 
 Installation
 ============
