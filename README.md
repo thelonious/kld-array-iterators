@@ -279,3 +279,76 @@ Output:
 569: -2.003E+300
 570: +2.003E+300
 ```
+
+Deck of Cards
+-------------
+    // create an order deck of cards
+    var deck = [];
+
+    new CrossProductIterator(
+        new Iterator('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'),
+        new Iterator('♠', '♣', '♥', '♦')
+    ).forEach(function(card) {
+        deck.push(card.join(""));
+    });
+
+    // shuffle the deck and print it
+    new RandomIterator(deck).forEach(function(card) {
+        console.log(card);
+    });
+
+Output:
+```
+8♠
+3♦
+Q♠
+3♣
+8♦
+8♣
+2♠
+7♣
+6♥
+A♠
+4♥
+A♥
+J♦
+K♥
+8♥
+10♦
+K♣
+9♣
+5♣
+5♠
+3♥
+9♦
+Q♣
+A♦
+J♠
+4♣
+7♠
+A♣
+7♦
+J♥
+9♥
+6♣
+4♦
+2♥
+6♠
+Q♦
+5♥
+2♦
+10♣
+Q♥
+K♠
+J♣
+5♦
+7♥
+6♦
+3♠
+2♣
+10♥
+9♠
+K♦
+10♠
+4♠
+```
