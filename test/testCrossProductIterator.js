@@ -17,6 +17,46 @@ exports.testEmptyArray = function(beforeExit, assert) {
     assert.equal(null, iter.next());
 };
 
+exports.testSingleItem = function(beforeExit, assert) {
+    var iter = new CrossProductIterator(1);
+
+    assert.equal(true, iter.hasNext());
+    assert.equal(1, iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
+
+exports.testSingleArray = function(beforeExit, assert) {
+    var iter = new CrossProductIterator([1]);
+
+    assert.equal(true, iter.hasNext());
+    assert.equal(1, iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
+
+exports.testMultipleItems = function(beforeExit, assert) {
+    var iter = new CrossProductIterator(1, 2);
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1, 2], iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
+
+exports.testMultipleItemArray = function(beforeExit, assert) {
+    var iter = new CrossProductIterator([1, 2]);
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1, 2], iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
+
 exports.testSingleEmptyIterator = function(beforeExit, assert) {
     var iter = new CrossProductIterator(new Iterator());
 
@@ -170,4 +210,20 @@ exports.testMultiIteratorArray = function(beforeExit, assert) {
 
     assert.equal(false, iter.hasNext());
     assert.eql(null, iter.next());
+};
+
+exports.testSingleItemAndIterator = function(beforeExit, assert) {
+    var iter = new CrossProductIterator(
+        1,
+        new Iterator(2, 3)
+    );
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1, 2], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([1, 3], iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
 };
