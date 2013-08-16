@@ -9,7 +9,7 @@ Installation
 
 Iterators
 =========
-Iterators implement a very simple API and they can be broken into two groups. This is detailed below.
+Iterators implement a very simple API.
 
 API
 ---
@@ -20,26 +20,45 @@ At a minimum, an iterator must implement the following methods.
 * reset - reset the iterator allowing it to provide all of its values again
 * forEach(callback) - invokes the specified callback for each item in the iterator. The callback receives a single argument; the current value of the iterator.
 
-Atomic Iterators
+All iterators may be instantiated using a single array or a list of arguments. These two forms are equivalent.
+
+All iterators except SubsetIterator and PermutationIterator may be constructed with any mixture of objects and iterators. Objects will be treated as one-time iterators. The descriptions below will discuss how iterators are handled by each type.
+
+Iterator
+--------
+A simple in-order walk of the provided args or array. If an argument is an iterator, then it will be completely exhausted before continuing to the next item.
+
+Reverse Iterator
 ----------------
-These iterators work directly with the content of a list of arguments or the elements of an array.
+A reverse walk of the provided args or array. If an argument is an iterator, then it will be completely exhausted before continuing to the next item. Note that items that are iterators will not reverse their members unless they themselves are ReverseIterators.
 
-* Iterator - a simple in-order walk of the provided args or array
-* Reverse Iterator - a reverse walk of the provided args or array
-* Random Iterator - a random walk of the provided args or array. All items are visited once and only once. The order is preserved between calls to "reset". The items can be randomized again by calling "shuffle". "reset" should be called after calling "shuffle".
-* Subset Iterator - a walk of all of the non-empty subsets of the provided args or array
-* Permutation Iterator - a walk of all permutations of the provided args or array
+Random Iterator
+---------------
+A random walk of the provided args or array. All items are visited once and only once. The order is preserved between calls to "reset". If an item is an iterator, it will be completely exhausted before moving to the next random item. The items can be randomized again by calling "shuffle". "reset" should be called after calling "shuffle".
 
-Composite Iterators
--------------------
-These iterators allow composition of other iterators. Iterators are provided in the list of aruments or as the elements of an array.
+Parallel Iterator
+-----------------
+Walk the provided args or array elements in parallel. This will return an array of values, one member from each item. If a non-iterator is used, it will return its value on each call to "next". If multiple iterators are used, iterators with shorter sequences will return null as their values.
 
-* Sequence Iterator - walk the list of iterators in the provided args or array. Each iterator is run to exhaustion before advancing to the next in the list.
-* Cross Product Iterator - iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array
+Round Robin Iterator
+--------------------
+Walks the provided args or array elements via rotation. A single item is emitted and then the next item is emitted. If a non-iterator is used, it will return its value each time it is up in the rotation. If multiple iterators are used, iteratros with shorter sequences will return null as their value when it is their turn in the rotation.
+
+Cross Product Iterator
+----------------------
+Iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array. If a non-iterator is used, it will return is value on each call to "next".
+
+Subset Iterator
+---------------
+A walk of all of the non-empty subsets of the provided args or array. This iterator does not support arguments that are iterators.
+
+Permutation Iterator
+--------------------
+A walk of all permutations of the provided args or array. This iterator does not support arguments that are iterators.
 
 Examples
 ========
-The following are some examples of each iterator in use. You can find the full source for these under the "examples" folder.
+The following are some examples of each iterator in use. You can find the full source for these under the "examples" folder. Also, be sure to look in the test folder for more obscure examples.
 
 Iterator
 --------
@@ -107,6 +126,50 @@ Output:
 4
 ```
 
+Parallel Iterator
+-----------------
+    var iter = new ParallelIterator(
+        new Iterator(1, 2, 3),
+        new Iterator('a', 'b', 'c'),
+        new Iterator('!', '?', '.')
+    );
+
+    iter.forEach(function(item) {
+        console.log(item);
+    });
+
+Output:
+```
+[ 1, 'a', '!' ]
+[ 2, 'b', '?' ]
+[ 3, 'c', '.' ]
+```
+
+Round Robin Iterator
+--------------------
+    var iter = new RoundRobinIterator(
+        new Iterator(1, 2, 3),
+        new Iterator('a', 'b', 'c'),
+        new Iterator('!', '?', '.')
+    );
+
+    iter.forEach(function(item) {
+        console.log(item);
+    });
+
+Output:
+```
+1
+a
+!
+2
+b
+?
+3
+c
+.
+```
+
 Subset Iterator
 ---------------
     new SubsetIterator(1, 2, 3, 4).forEach(function(value) {
@@ -166,9 +229,9 @@ Output:
 [ 4, 3, 2, 1 ]
 ```
 
-Sequence Iterator
------------------
-    new SequenceIterator(
+Nested Iterators
+----------------
+    new Iterator(
         new Iterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
         new Iterator('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
     ).forEach(function(value) {
@@ -198,44 +261,6 @@ h
 i
 ```
 
-Cross Product Iterator
-----------------------
-    var count = 0;
-
-    new CrossProductIterator(
-        new Iterator(1, 2),
-        new SubsetIterator('a', 'b', 'c'),
-        new PermutationIterator('X', 'Y', 'Z'),
-        new RandomIterator(4, 5, 6),
-        new ReverseIterator('d', 'e')
-    ).forEach(function(value) {
-        console.log("%d: %s", ++count, flatten(value).join(""));
-    });
-
-Output:
-```
-1: 1aXYZ5e
-2: 2aXYZ5e
-3: 1bXYZ5e
-4: 2bXYZ5e
-5: 1abXYZ5e
-6: 2abXYZ5e
-7: 1cXYZ5e
-8: 2cXYZ5e
-9: 1acXYZ5e
-...
-495: 1abZYX4d
-496: 2abZYX4d
-497: 1cZYX4d
-498: 2cZYX4d
-499: 1acZYX4d
-500: 2acZYX4d
-501: 1bcZYX4d
-502: 2bcZYX4d
-503: 1abcZYX4d
-504: 2abcZYX4d
-```
-
 Generate Floats
 ---------------
     var count = 0;
@@ -244,8 +269,8 @@ Generate Floats
         new Iterator('', '-', '+'),
         new Iterator('1', '2'),
         new Iterator('', '.0', '.1', '.02', '.003'),
-        new SequenceIterator(
-            new Iterator(''),
+        new Iterator(
+            '',
             new CrossProductIterator(
                 new Iterator('e', 'E'),
                 new Iterator('', '-', '+'),
