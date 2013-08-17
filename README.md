@@ -111,6 +111,30 @@ Output:
 1
 ```
 
+Range Iterator
+--------------
+Walk from a starting number to an ending number in steps. If the step is not included, a value of 1 or -1 will be used.
+
+    var iter = new RangeIterator(5, 15);
+
+    iter.forEach(function(item) {
+        console.log(item);
+    });
+
+Output:
+```
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+```
+
 Random Iterator
 ---------------
 A random walk of the provided args or array. All items are visited once and only once. The order is preserved between calls to "reset". If an item is an iterator, it will be completely exhausted before moving to the next random item. The items can be randomized again by calling "shuffle". "reset" should be called after calling "shuffle".
@@ -187,9 +211,9 @@ Cross Product Iterator
 ----------------------
 Iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array. If a non-iterator is used, it will return is value on each call to "next".
 
+    // create an order deck of cards
     var deck = [];
 
-    // create an ordered deck of cards
     new CrossProductIterator(
         new Iterator('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'),
         new Iterator('♠', '♣', '♥', '♦')
@@ -198,9 +222,9 @@ Iterate over a list of iterators, treating the entire group much like a counter.
     });
 
     // shuffle the deck and print it
-    new RandomIterator(deck).forEach(function(card) {
-        console.log(card);
-    });
+    console.log(
+        new RandomIterator(deck).takeAll().join("\n")
+    );
 
 Output:
 ```

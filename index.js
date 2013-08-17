@@ -7,6 +7,7 @@ exports.RandomIterator = require('./lib/RandomIterator');
 exports.ParallelIterator = require('./lib/ParallelIterator');
 exports.RoundRobinIterator = require('./lib/RoundRobinIterator');
 exports.CrossProductIterator = require('./lib/CrossProductIterator');
+exports.RangeIterator = require('./lib/RangeIterator');
 
 // needs conversion
 exports.SubsetIterator = require('./lib/SubsetIterator');
