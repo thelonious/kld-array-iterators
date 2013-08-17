@@ -127,3 +127,170 @@ exports.testMultipleIterators = function(beforeExit, assert) {
     assert.equal(false, iter.hasNext());
     assert.eql(null, iter.next());
 };
+
+exports.testForEach = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    iter.forEach(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+    });
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
+
+exports.testEvery = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.every(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return item > 0;
+    });
+
+    assert.equal(true, result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
+
+exports.testEvery2 = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.every(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return item > 3;
+    });
+
+    assert.equal(false, result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(1, counter);
+};
+
+exports.testSome = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.some(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return item > 5;
+    });
+
+    assert.equal(false, result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
+
+exports.testSome2 = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.some(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return item > 3;
+    });
+
+    assert.equal(true, result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(4, counter);
+};
+
+exports.testFilter = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.filter(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return (item % 2) == 1;
+    });
+
+    assert.eql([1, 3, 5], result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
+
+exports.testMap = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.map(function(item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return item * item;
+    });
+
+    assert.eql([1, 4, 9, 16, 25], result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
+
+exports.testReduce = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 1;
+
+    var result = iter.reduce(function(accumulator, item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return accumulator + item;
+    });
+
+    assert.equal(15, result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
+
+exports.testReduce2 = function(beforeExit, assert) {
+    var items = [1, 2, 3, 4, 5];
+    var iter = new Iterator(items);
+    var counter = 0;
+
+    var result = iter.reduce(function(accumulator, item, index, iterator) {
+        assert.equal(counter++, index);
+        assert.equal(items[index], item);
+        assert.equal(iter, iterator);
+
+        return accumulator * item;
+    }, 1);
+
+    assert.equal(120, result);
+
+    // sanity check to make sure forEach actually ran
+    assert.equal(items.length, counter);
+};
