@@ -15,6 +15,6 @@ new CrossProductIterator(
 });
 
 // shuffle the deck and print it
-new RandomIterator(deck).forEach(function(card) {
-    console.log(card);
-});
+console.log(
+    new RandomIterator(deck).takeAll().join("\n")
+);
