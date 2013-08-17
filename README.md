@@ -35,7 +35,7 @@ All sub-classes of Iterator include the following convenience methods too:
 
 All iterators may be instantiated using a single array or a list of arguments. These two forms are equivalent. Note that two or more arrays will treat each array as elements in the iterator, causing the arrays to be returned as values of the iterator.
 
-All iterators may be constructed with any mixture of objects and iterators. Objects will be treated as one-time iterators. Iterators will be run to exhaustion. The descriptions below discuss how iterators are handled by each type of iterator.
+All iterators may be constructed with any mixture of objects and iterators. Objects will be treated as iterators that return the object forever. Iterators will be run to exhaustion. The descriptions below discuss how iterators are handled by each type of iterator.
 
 Iterator
 --------
@@ -167,7 +167,7 @@ Output:
 
 Round Robin Iterator
 --------------------
-Walks the provided args or array elements via rotation. A single item is emitted and then the next item is emitted. If a non-iterator is used, it will return its value each time it is up in the rotation. If multiple iterators are used, iteratros with shorter sequences will return null as their value when it is their turn in the rotation.
+Walks the provided args or array elements in rotation. A single item is emitted and then the next item is emitted. If a non-iterator is used, it will return its value each time it is up in the rotation. If multiple iterators are used, iterators with shorter sequences will return null as their value when it is their turn in the rotation.
 
     var iter = new RoundRobinIterator(
         new Iterator(1, 2, 3),
@@ -317,7 +317,7 @@ Output:
 
 Permutation Iterator
 --------------------
-A walk of all permutations of the provided args or array. This iterator does not support arguments that are iterators.
+A walk of all permutations of the provided args or array.
 
     new PermutationIterator(1, 2, 3, 4).forEach(function(value) {
         console.log(value);
