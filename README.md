@@ -18,7 +18,7 @@ To be considered an Iterator, an object must implement the following methods, at
 * next - returns the next value from the iterator or null if the iterator has been exhausted
 * reset - reset the iterator allowing it to provide all of its values again
 
-All iterators include the following array-like methods as well
+All sub-classes of Iterator include the following array-like methods as well:
 
 * forEach(callback) - invokes the callback for each item in the iterator. The callback receives a single argument; the current value of the iterator.
 * every(callback) - invokes the callback for each item in the iterator. Returns true if all calls to the callback return true. Processing stops the first time a callback returns false. An empty iterator will return true.
@@ -26,6 +26,12 @@ All iterators include the following array-like methods as well
 * filter(callback) - invokes the callback for each item in the iterator. Returns an array of values for each value that the callback returned true.
 * map(callback) - invokes the callback for each item in the iterator. Returns an array of values with each value being the return value of the callback.
 * reduce(callback, start) - invokes the callback for each item in the iterator. The callback receives two values. If the optional "start" value is supplied, the first two values will the "start" and the first value in the iterator. If "start" is not defined, then the first two values will be the first two values in the iterator. Returns the accumulated value after repeatedly applying the callback to all items in the iterator.
+
+All sub-classes of Iterator include the following convenience methods too:
+
+* skip(count) - calls "next" the specified number of times
+* take(count) - accumulates calls to "next" the specified number of times. Accumulation stops if "hasNext" returns false before the full count has been iterated
+* takeAll - accumulates calls to "next" until "hasNext" returns false
 
 All iterators may be instantiated using a single array or a list of arguments. These two forms are equivalent. Note that two or more arrays will treat each array as elements in the iterator, causing the arrays to be returned as values of the iterator.
 
