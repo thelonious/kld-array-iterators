@@ -5,7 +5,7 @@ exports.testCountingNumber = function(beforeExit, assert) {
     var result = [];
     var count = 0;
 
-    gen.forEach(function(item) {
+    gen.every(function(item) {
         result.push(item);
         return ++count < 5;
     });
