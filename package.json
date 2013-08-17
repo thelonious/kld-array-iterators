@@ -19,6 +19,9 @@
     "arrays",
     "iterator"
   ],
+  "dependencies": {
+    "kld-class-utils": ">= 0.0.1"
+  },
   "devDependencies": {
     "expresso": "0.9.2"
   },
