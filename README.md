@@ -35,7 +35,7 @@ All sub-classes of Iterator include the following convenience methods too:
 
 All iterators may be instantiated using a single array or a list of arguments. These two forms are equivalent. Note that two or more arrays will treat each array as elements in the iterator, causing the arrays to be returned as values of the iterator.
 
-All iterators except SubsetIterator and PermutationIterator may be constructed with any mixture of objects and iterators. Objects will be treated as one-time iterators. Iterators will be run to exhaustion. The descriptions below discuss how iterators are handled by each type of iterator.
+All iterators may be constructed with any mixture of objects and iterators. Objects will be treated as one-time iterators. Iterators will be run to exhaustion. The descriptions below discuss how iterators are handled by each type of iterator.
 
 Iterator
 --------
@@ -259,7 +259,7 @@ K♦
 
 Subset Iterator
 ---------------
-A walk of all of the non-empty subsets of the provided args or array. This iterator does not support arguments that are iterators.
+A walk of all of the non-empty subsets of the provided args or array.
 
     new SubsetIterator(1, 2, 3, 4).forEach(function(value) {
         console.log(value);
@@ -282,6 +282,37 @@ Output:
 [ 1, 3, 4 ]
 [ 2, 3, 4 ]
 [ 1, 2, 3, 4 ]
+```
+
+If this iterator has items that are iterators, the cross product of the items in the currently active subset will be emitted before advancing to the next subset of items. For example:
+
+    new SubsetIterator(
+        new Iterator('a', 'b'),
+        'c',
+        new Iterator('d', 'e')
+    ).forEach(function(value) {
+        console.log(value);
+    });
+
+Output:
+```
+[ 'a' ]
+[ 'b' ]
+[ 'c' ]
+[ 'a', 'c' ]
+[ 'b', 'c' ]
+[ 'd' ]
+[ 'e' ]
+[ 'a', 'd' ]
+[ 'b', 'd' ]
+[ 'a', 'e' ]
+[ 'b', 'e' ]
+[ 'c', 'd' ]
+[ 'c', 'e' ]
+[ 'a', 'c', 'd' ]
+[ 'b', 'c', 'd' ]
+[ 'a', 'c', 'e' ]
+[ 'b', 'c', 'e' ]
 ```
 
 Permutation Iterator
@@ -318,4 +349,42 @@ Output:
 [ 4, 2, 3, 1 ]
 [ 3, 4, 2, 1 ]
 [ 4, 3, 2, 1 ]
+```
+
+If this iterator has items that are iterators, the cross product of the items in the currently active permutation will be emitted before advancing to the next permutation of items. For example:
+
+    new PermutationIterator(
+        new Iterator('a', 'b'),
+        'c',
+        new Iterator('d', 'e')
+    ).forEach(function(value) {
+        console.log(value);
+    });
+
+Output:
+```
+[ 'a', 'c', 'd' ]
+[ 'b', 'c', 'd' ]
+[ 'a', 'c', 'e' ]
+[ 'b', 'c', 'e' ]
+[ 'a', 'd', 'c' ]
+[ 'b', 'd', 'c' ]
+[ 'a', 'e', 'c' ]
+[ 'b', 'e', 'c' ]
+[ 'c', 'a', 'd' ]
+[ 'c', 'b', 'd' ]
+[ 'c', 'a', 'e' ]
+[ 'c', 'b', 'e' ]
+[ 'd', 'a', 'c' ]
+[ 'e', 'a', 'c' ]
+[ 'd', 'b', 'c' ]
+[ 'e', 'b', 'c' ]
+[ 'c', 'd', 'a' ]
+[ 'c', 'e', 'a' ]
+[ 'c', 'd', 'b' ]
+[ 'c', 'e', 'b' ]
+[ 'd', 'c', 'a' ]
+[ 'e', 'c', 'a' ]
+[ 'd', 'c', 'b' ]
+[ 'e', 'c', 'b' ]
 ```
