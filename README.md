@@ -135,27 +135,6 @@ Output:
 4
 ```
 
-Parallel Iterator
------------------
-Walk the provided args or array elements in parallel. This will return an array of values, one member from each item. If a non-iterator is used, it will return its value on each call to "next". If multiple iterators are used, iterators with shorter sequences will return null as their values.
-
-    var iter = new ParallelIterator(
-        new Iterator(1, 2, 3),
-        new Iterator('a', 'b', 'c'),
-        new Iterator('!', '?', '.')
-    );
-
-    iter.forEach(function(item) {
-        console.log(item);
-    });
-
-Output:
-```
-[ 1, 'a', '!' ]
-[ 2, 'b', '?' ]
-[ 3, 'c', '.' ]
-```
-
 Round Robin Iterator
 --------------------
 Walks the provided args or array elements via rotation. A single item is emitted and then the next item is emitted. If a non-iterator is used, it will return its value each time it is up in the rotation. If multiple iterators are used, iteratros with shorter sequences will return null as their value when it is their turn in the rotation.
@@ -181,6 +160,27 @@ b
 3
 c
 .
+```
+
+Parallel Iterator
+-----------------
+Walk the provided args or array elements in parallel. This will return an array of values, one member from each item. If a non-iterator is used, it will return its value on each call to "next". If multiple iterators are used, iterators with shorter sequences will return null as their values.
+
+    var iter = new ParallelIterator(
+        new Iterator(1, 2, 3),
+        new Iterator('a', 'b', 'c'),
+        new Iterator('!', '?', '.')
+    );
+
+    iter.forEach(function(item) {
+        console.log(item);
+    });
+
+Output:
+```
+[ 1, 'a', '!' ]
+[ 2, 'b', '?' ]
+[ 3, 'c', '.' ]
 ```
 
 Cross Product Iterator
