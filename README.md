@@ -416,23 +416,21 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
     var primeIterator = {
         hasNext: function() { return true; },
         next: function() {
-            var length = this.primes.length;
+            while (true) {
+                this.candidate++;
 
-            if (length === 0) {
-                this.primes.push(2);
-            }
-            else {
-                for (var candidate = this.primes[length - 1] + 1;; candidate++) {
-                    if (this.primes.every(function(prime) { return (candidate % prime) !== 0; })) {
-                        this.primes.push(candidate);
-                        break;
-                    }
+                var stoppingPoint = Math.sqrt(this.candidate);
+                var primes = this.primes.filter(function(prime) { prime <= stoppingPoint; });
+
+                if (primes.every(function(prime) { return (this.candidate % prime) !== 0; })) {
+                    this.primes.push(this.candidate);
+                    break;
                 }
             }
 
-            return this.primes[length];
+            return this.candidate;
         },
-        reset: function() { this.primes = []; }
+        reset: function() { this.primes = []; this.candidate = 1; }
     };
 
     var primes = new TransformIterator(primeIterator).take(100);
