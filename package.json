@@ -1,6 +1,6 @@
 {
   "name": "kld-array-iterators",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A collection of classes used to iterate over arrays",
   "author": {
     "name": "Kevin Lindsey",
