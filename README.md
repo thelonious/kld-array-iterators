@@ -119,7 +119,7 @@ Output:
 
 Range Iterator
 --------------
-Walk from a starting number to an ending number in steps. If the step is not included, a value of 1 or -1 will be used.
+Walk from a starting number to an ending number in steps. If the step is not included, a value of 1 or -1 will be used as it appropriate for the relative magnitude of the start and end values. The second argument is optional and will default to 2^32 if it is not included.
 
     var iter = new RangeIterator(5, 15);
 
@@ -388,3 +388,76 @@ Output:
 [ 'd', 'c', 'b' ]
 [ 'e', 'c', 'b' ]
 ```
+
+Transform Iterator
+------------------
+The transform iterator serves a few of purposes. It can be used to convert a lightweight iterator (an object minimally defining the hasNext, next, and reset methods). Alternately, it can be used to lazily transform the results of another iterator.
+
+The following example implements a simple yet inefficient iterator that returns prime numbers.
+
+    var primeIterator = {
+        primes: [],
+        hasNext: function() { return true; },
+        next: function() {
+            var length = this.primes.length;
+
+            if (length == 0) {
+                this.primes.push(2);
+            }
+            else {
+                for (var candidate = this.primes[length - 1] + 1;; candidate++) {
+                    var stoppingPoint = Math.sqrt(candidate);
+                    var found = true;
+
+                    for (var i = 0; i < length; i++) {
+                        var prime = this.primes[i];
+
+                        if (prime > stoppingPoint) {
+                            break;
+                        }
+                        else if ((candidate % prime) === 0) {
+                            found = false;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        this.primes.push(candidate);
+                        break;
+                    }
+                }
+            }
+
+            return this.primes[length];
+        },
+        reset: function() { this.primes = []; }
+    };
+
+    var primes = new TransformIterator(primeIterator).take(10);
+
+    console.log(primes.join(","));
+
+Output:
+```
+2,3,5,7,11,13,17,19,23,29
+```
+
+The array-like method "map" is a great way to apply a transform to the elements of an iterator; however, if you are working with an infinite sequence, "map" is not an option since it will loops endlessly. Transform iterators allow for an optional second argument; a function that will be applied to each member of the iterator as the element is being produced. This allows you to generate transformed values lazily as needed, thus avoiding map's infinite loop.
+
+    var squares = new TransformIterator(
+        new RangeIterator(1),
+        function(x) { return x*x; }
+    ).take(5);
+
+    console.log(squares.join(","));
+
+Output:
+```
+1,4,9,16,25
+```
+
+Of course, this could be achieved in other ways. For eaxampele, you could use the following instead.
+
+    var squares = new RangeIterator(1).take(5).map(function(x) { return x*x; });
+
+TransformIterator is probably more interesting as a wrapper for lightweight iterators.
