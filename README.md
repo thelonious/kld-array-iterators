@@ -407,7 +407,7 @@ Output:
 1,4,9,16,25
 ```
 
-Of course, this could be achieved in other ways. For exampele, you could use the following instead.
+Of course, this could be achieved in other ways. For example, you could use the following instead.
 
     var squares = new RangeIterator(1).take(5).map(function(x) { return x*x; });
 
@@ -418,29 +418,25 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
         next: function() {
             var length = this.primes.length;
 
-            if (length == 0) {
+            if (length === 0) {
                 this.primes.push(2);
             }
             else {
+                candidates:
                 for (var candidate = this.primes[length - 1] + 1;; candidate++) {
                     var stoppingPoint = Math.sqrt(candidate);
-                    var found = true;
 
                     for (var i = 0; i < length; i++) {
                         var prime = this.primes[i];
 
                         if (prime > stoppingPoint) {
-                            break;
+                            this.primes.push(candidate);
+                            break candidates;
                         }
                         else if ((candidate % prime) === 0) {
-                            found = false;
+                            foundPrime = false;
                             break;
                         }
-                    }
-
-                    if (found) {
-                        this.primes.push(candidate);
-                        break;
                     }
                 }
             }
@@ -450,7 +446,7 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
         reset: function() { this.primes = []; }
     };
 
-    var primes = new TransformIterator(primeIterator).take(10);
+    var primes = new TransformIterator(primeIterator).take(100);
 
     console.log(primes.join(","));
 

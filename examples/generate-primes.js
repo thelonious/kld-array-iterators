@@ -7,29 +7,25 @@ var primeIterator = {
     next: function() {
         var length = this.primes.length;
 
-        if (length == 0) {
+        if (length === 0) {
             this.primes.push(2);
         }
         else {
+            candidates:
             for (var candidate = this.primes[length - 1] + 1;; candidate++) {
                 var stoppingPoint = Math.sqrt(candidate);
-                var found = true;
 
                 for (var i = 0; i < length; i++) {
                     var prime = this.primes[i];
 
                     if (prime > stoppingPoint) {
-                        break;
+                        this.primes.push(candidate);
+                        break candidates;
                     }
                     else if ((candidate % prime) === 0) {
-                        found = false;
+                        foundPrime = false;
                         break;
                     }
-                }
-
-                if (found) {
-                    this.primes.push(candidate);
-                    break;
                 }
             }
         }
