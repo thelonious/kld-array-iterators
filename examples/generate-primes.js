@@ -3,7 +3,6 @@
 var TransformIterator = require('kld-array-iterators').TransformIterator;
 
 var primeIterator = {
-    primes: [],
     hasNext: function() { return true; },
     next: function() {
         var length = this.primes.length;

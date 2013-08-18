@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 
-var TransformIterator = require('kld-array-iterators').TransformIterator;
+var TransformIterator = require('kld-array-iterators').TransformIterator,
+    RangeIterator = require('kld-array-iterators').RangeIterator;
 
-var sequence = new TransformIterator(
-    {
-        current: 1,
-        hasNext: function() { return true; },
-        next: function() { try { return current; } finally { current = 3 - current } },
-        reset: function() { current = 1; }
-    }
+var squares = new TransformIterator(
+    new RangeIterator(1),
+    function(x) { return x*x; }
 ).take(5);
 
-console.log(sequence.join(","));
+console.log(squares.join(","));
