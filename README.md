@@ -424,18 +424,9 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
             else {
                 candidates:
                 for (var candidate = this.primes[length - 1] + 1;; candidate++) {
-                    var stoppingPoint = Math.sqrt(candidate);
-
-                    for (var i = 0; i < length; i++) {
-                        var prime = this.primes[i];
-
-                        if (prime > stoppingPoint) {
-                            this.primes.push(candidate);
-                            break candidates;
-                        }
-                        else if ((candidate % prime) === 0) {
-                            break;
-                        }
+                    if (this.primes.every(function(prime) { return (candidate % prime) !== 0; })) {
+                        this.primes.push(candidate);
+                        break;
                     }
                 }
             }
