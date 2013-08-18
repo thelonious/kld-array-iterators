@@ -434,7 +434,6 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
                             break candidates;
                         }
                         else if ((candidate % prime) === 0) {
-                            foundPrime = false;
                             break;
                         }
                     }

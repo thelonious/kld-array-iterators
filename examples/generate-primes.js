@@ -23,7 +23,6 @@ var primeIterator = {
                         break candidates;
                     }
                     else if ((candidate % prime) === 0) {
-                        foundPrime = false;
                         break;
                     }
                 }
