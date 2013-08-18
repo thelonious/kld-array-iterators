@@ -9,17 +9,23 @@ var primeIterator = {
 
         if (length === 0) {
             this.primes.push(2);
+            this.candidate = 2;
         }
         else {
-            for (var candidate = this.primes[length - 1] + 1;; candidate++) {
-                if (this.primes.every(function(prime) { return (candidate % prime) !== 0; })) {
-                    this.primes.push(candidate);
+            while (true) {
+                this.candidate++;
+
+                var stoppingPoint = Math.sqrt(this.candidate);
+                var primes = this.primes.filter(function(prime) { prime <= stoppingPoint; });
+
+                if (primes.every(function(prime) { return (this.candidate % prime) !== 0; })) {
+                    this.primes.push(this.candidate);
                     break;
                 }
             }
         }
 
-        return this.primes[length];
+        return this.candidate;
     },
     reset: function() { this.primes = []; }
 };
