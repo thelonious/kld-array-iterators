@@ -6,13 +6,12 @@ var primeIterator = {
     hasNext: function() { return true; },
     next: function() {
         while (true) {
-            this.candidate++;
+            var candidate = ++this.candidate;
+            var stoppingPoint = Math.sqrt(candidate);
+            var possibleDivisors = this.primes.filter(function(prime) { return prime <= stoppingPoint; });
 
-            var stoppingPoint = Math.sqrt(this.candidate);
-            var primes = this.primes.filter(function(prime) { prime <= stoppingPoint; });
-
-            if (primes.every(function(prime) { return (this.candidate % prime) !== 0; })) {
-                this.primes.push(this.candidate);
+            if (possibleDivisors.every(function(prime) { return (candidate % prime) !== 0; })) {
+                this.primes.push(candidate);
                 break;
             }
         }

@@ -417,13 +417,12 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
         hasNext: function() { return true; },
         next: function() {
             while (true) {
-                this.candidate++;
+                var candidate = ++this.candidate;
+                var stoppingPoint = Math.sqrt(candidate);
+                var possibleDivisors = this.primes.filter(function(prime) { return prime <= stoppingPoint; });
 
-                var stoppingPoint = Math.sqrt(this.candidate);
-                var primes = this.primes.filter(function(prime) { prime <= stoppingPoint; });
-
-                if (primes.every(function(prime) { return (this.candidate % prime) !== 0; })) {
-                    this.primes.push(this.candidate);
+                if (possibleDivisors.every(function(prime) { return (candidate % prime) !== 0; })) {
+                    this.primes.push(candidate);
                     break;
                 }
             }
@@ -437,7 +436,8 @@ TransformIterator is probably more interesting as a wrapper for lightweight iter
 
     console.log(primes.join(","));
 
+
 Output:
 ```
-2,3,5,7,11,13,17,19,23,29
+2,3,5,7,11,13,17,19,23,29,...,521,523,541
 ```
