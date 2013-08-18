@@ -11,7 +11,6 @@ var primeIterator = {
             this.primes.push(2);
         }
         else {
-            candidates:
             for (var candidate = this.primes[length - 1] + 1;; candidate++) {
                 if (this.primes.every(function(prime) { return (candidate % prime) !== 0; })) {
                     this.primes.push(candidate);
