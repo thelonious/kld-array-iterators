@@ -411,7 +411,7 @@ Of course, this could be achieved in other ways. For example, you could use the 
 
     var squares = new RangeIterator(1).take(5).map(function(x) { return x*x; });
 
-TransformIterator is probably more interesting as a wrapper for lightweight iterators. For example, the following implements a simple yet inefficient iterator that returns prime numbers.
+TransformIterator is probably more interesting as a wrapper for lightweight iterators. For example, the following implements a simple yet inefficient iterator that returns prime numbers. A more efficient version can be found in examples/generate-primes-2.js.
 
     var primeIterator = {
         hasNext: function() { return true; },

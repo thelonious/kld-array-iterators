@@ -10,9 +10,9 @@ var primeIterator = {
         while (true) {
             var candidate = ++this.candidate;
 
-            if (typeof this.composites[candidate] === "undefined") {
+            if (this.composites.hasOwnProperty(candidate) === false) {
                 this.composites[candidate*candidate] = [candidate];
-                return candidate;
+                break;
             }
             else {
                 var primes = this.composites[candidate];
@@ -21,16 +21,19 @@ var primeIterator = {
                     var prime = primes[i];
                     var pq = prime + candidate;
 
-                    if (typeof this.composites[pq] === "undefined") {
-                        this.composites[pq] = [];
+                    if (this.composites.hasOwnProperty(pq)) {
+                        this.composites[pq].push(prime);
                     }
-
-                    this.composites[pq].push(prime);
+                    else {
+                        this.composites[pq] = [prime];
+                    }
                 }
 
                 delete this.composites[candidate];
             }
         }
+
+        return this.candidate;
     },
     reset: function() { this.composites = {}; this.candidate = 1; }
 };
