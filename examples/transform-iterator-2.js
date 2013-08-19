@@ -9,6 +9,6 @@ var sequence = new TransformIterator(
         next: function() { try { return current; } finally { current = 3 - current } },
         reset: function() { current = 1; }
     }
-).take(5);
+).take(11);
 
 console.log(sequence.join(","));
