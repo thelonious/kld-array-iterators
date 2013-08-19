@@ -15,17 +15,17 @@ var primeIterator = {
                 break;
             }
             else {
-                var primes = this.composites[candidate];
+                var factors = this.composites[candidate];
 
-                for (var i = 0; i < primes.length; i++) {
-                    var prime = primes[i];
-                    var pq = prime + candidate;
+                for (var i = 0; i < factors.length; i++) {
+                    var factor = factors[i];
+                    var pq = factor + candidate;
 
                     if (this.composites.hasOwnProperty(pq)) {
-                        this.composites[pq].push(prime);
+                        this.composites[pq].push(factor);
                     }
                     else {
-                        this.composites[pq] = [prime];
+                        this.composites[pq] = [factor];
                     }
                 }
 
