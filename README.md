@@ -217,6 +217,32 @@ Cross Product Iterator
 ----------------------
 Iterate over a list of iterators, treating the entire group much like a counter. This is the cross-product of all iterators in the provided args or array. If a non-iterator is used, it will return is value on each call to "next".
 
+Cross product iterators iterate through their items from right-to-left allowing for a natural counting order. For instance, the following example counts from 0 to 29:
+
+    new CrossProductIterator(
+        new Iterator('', 1, 2),
+        new RangeIterator(0, 10)
+    ).forEach(function(value) {
+        console.log("%s", value.join(""));
+    });
+
+Output:
+```
+0
+1
+2
+3
+4
+...
+25
+26
+27
+28
+29
+```
+
+In the following example, we create an order deck of cards and then shuffle them with a RandomIterator.
+
     // create an order deck of cards
     var deck = [];
 
