@@ -294,3 +294,18 @@ exports.testReduce2 = function(beforeExit, assert) {
     // sanity check to make sure forEach actually ran
     assert.equal(items.length, counter);
 };
+
+exports.testFork = function(beforeExit, assert) {
+    var iter = new Iterator(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+    iter.skip(5);
+
+    var fork = iter.fork();
+
+    while (iter.hasNext()) {
+        assert.equal(true, fork.hasNext());
+        assert.eql(fork.next(), iter.next());
+    }
+
+    assert.equal(fork.hasNext(), iter.hasNext());
+};

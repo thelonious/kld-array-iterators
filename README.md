@@ -32,6 +32,7 @@ All sub-classes of Iterator include the following convenience methods too:
 * skip(count) - calls "next" the specified number of times
 * take(count) - accumulates calls to "next" the specified number of times. Accumulation stops if "hasNext" returns false before the full count has been iterated
 * takeAll - accumulates calls to "next" until "hasNext" returns false
+* fork - allows you to make a copy of the iterator and its contents (recursively forking descendant iterators) while maintaining current state.
 
 All iterators may be instantiated using a single array or a list of arguments. These two forms are equivalent. Note that two or more arrays will treat each array as elements in the iterator, causing the arrays to be returned as values of the iterator.
 

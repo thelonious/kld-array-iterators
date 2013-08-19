@@ -125,3 +125,22 @@ exports.testMultipleUneqallySizedIterators2 = function(beforeExit, assert) {
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
+
+exports.testFork = function(beforeExit, assert) {
+    var iter = new ParallelIterator(
+        new Iterator(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+        new Iterator(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+        new Iterator(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    );
+
+    iter.skip(5);
+
+    var fork = iter.fork();
+
+    while (iter.hasNext()) {
+        assert.equal(true, fork.hasNext());
+        assert.eql(fork.next(), iter.next());
+    }
+
+    assert.equal(fork.hasNext(), iter.hasNext());
+};

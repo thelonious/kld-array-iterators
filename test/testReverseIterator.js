@@ -128,3 +128,18 @@ exports.testMultipleIterators = function(beforeExit, assert) {
     assert.equal(false, iter.hasNext());
     assert.eql(null, iter.next());
 };
+
+exports.testFork = function(beforeExit, assert) {
+    var iter = new ReverseIterator(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+    iter.skip(5);
+
+    var fork = iter.fork();
+
+    while (iter.hasNext()) {
+        assert.equal(true, fork.hasNext());
+        assert.eql(fork.next(), iter.next());
+    }
+
+    assert.equal(fork.hasNext(), iter.hasNext());
+};

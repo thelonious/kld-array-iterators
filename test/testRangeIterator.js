@@ -27,3 +27,18 @@ exports.testNegativeStep = function(beforeExit, assert) {
 
     assert.eql([10, 8, 6, 4, 2], result);
 };
+
+exports.testFork = function(beforeExit, assert) {
+    var iter = new RangeIterator(0, 10);
+
+    iter.skip(5);
+
+    var fork = iter.fork();
+
+    while (iter.hasNext()) {
+        assert.equal(true, fork.hasNext());
+        assert.eql(fork.next(), iter.next());
+    }
+
+    assert.equal(fork.hasNext(), iter.hasNext());
+};

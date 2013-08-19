@@ -56,3 +56,18 @@ exports.testCustomIterator = function(beforeExit, assert) {
 
     assert.eql([0, 2, 4, 6, 8], result);
 }
+
+exports.testFork = function(beforeExit, assert) {
+    var iter = new TransformIterator(new RangeIterator(1, 100));
+
+    iter.skip(5);
+
+    var fork = iter.fork();
+
+    while (iter.hasNext()) {
+        assert.equal(true, fork.hasNext());
+        assert.eql(fork.next(), iter.next());
+    }
+
+    assert.equal(fork.hasNext(), iter.hasNext());
+};
