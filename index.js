@@ -11,3 +11,4 @@ exports.RangeIterator = require('./lib/RangeIterator');
 exports.SubsetIterator = require('./lib/SubsetIterator');
 exports.PermutationIterator = require('./lib/PermutationIterator');
 exports.TransformIterator = require('./lib/TransformIterator');
+exports.RepeatIterator = require('./lib/RepeatIterator');
