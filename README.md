@@ -468,3 +468,33 @@ Output:
 ```
 2,3,5,7,11,13,17,19,23,29,...,521,523,541
 ```
+
+Repeat Iterator
+---------------
+The repeat iterator is used to repeat a specified iterator, while adding a copy of the iteration on each iteration. This is useful when you want to simulate multipliers like zero-or-one (optional), zero-or-more (kleene closure), one-or-more (positive closure), or specific ranges. For example, the following produces numbers from 0 to 999.
+
+    var iter = new RepeatIterator(
+        new RangeIterator(0, 10),
+        1,
+        3
+    );
+
+    iter.forEach(function(item) {
+        console.log(item.join(""));
+    });
+
+Output:
+```
+0
+1
+2
+3
+4
+5
+...
+995
+996
+997
+998
+999
+```
