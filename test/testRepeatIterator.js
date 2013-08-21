@@ -70,3 +70,33 @@ exports.testOneOrTwo = function(beforeExit, assert) {
     assert.equal(false, iter.hasNext());
     assert.equal(null, iter.next());
 };
+
+exports.testNestedRepeatIterators = function(beforeExit, assert) {
+    var iter = new RepeatIterator(
+        new RepeatIterator(
+            new Iterator('a'),
+            1,
+            4
+        ),
+        0,
+        1
+    );
+
+    assert.equal(true, iter.hasNext());
+    assert.equal(null, iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([['a']], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([['a', 'a']], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([['a', 'a', 'a']], iter.next());
+
+    assert.equal(true, iter.hasNext());
+    assert.eql([['a', 'a', 'a', 'a']], iter.next());
+
+    assert.equal(false, iter.hasNext());
+    assert.equal(null, iter.next());
+};
