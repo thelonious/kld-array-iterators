@@ -20,12 +20,12 @@ To be considered an Iterator, an object must implement the following methods, at
 
 All sub-classes of Iterator include the following array-like methods as well:
 
-* forEach(callback) - invokes the callback for each item in the iterator. The callback receives a single argument; the current value of the iterator.
-* every(callback) - invokes the callback for each item in the iterator. Returns true if all calls to the callback return true. Processing stops the first time a callback returns false. An empty iterator will return true.
-* some(callback) - invokes the callback for each item in the iterator. Returns true if any calls to the callback return true. Processing stops the first time a callback returns true. An empty iterator will return false.
-* filter(callback) - invokes the callback for each item in the iterator. Returns an array of values for each value that the callback returned true.
-* map(callback) - invokes the callback for each item in the iterator. Returns an array of values with each value being the return value of the callback.
-* reduce(callback, start) - invokes the callback for each item in the iterator. The callback receives two values. If the optional "start" value is supplied, the first two values will the "start" and the first value in the iterator. If "start" is not defined, then the first two values will be the first two values in the iterator. Returns the accumulated value after repeatedly applying the callback to all items in the iterator.
+* forEach(callback) - invokes the callback for each item in the iterator. The callback receives the current value of the iterator, the index of the value, and a reference to the iterator itself.
+* every(callback) - invokes the callback for each item in the iterator. The callback receives the current value of the iterator, the index of the value, and a reference to the iterator itself. This method returns true if all calls to the callback return true. Processing stops the first time a callback returns false. An empty iterator will return true.
+* some(callback) - invokes the callback for each item in the iterator. The callback receives the current value of the iterator, the index of the value, and a reference to the iterator itself. This method returns true if any calls to the callback return true. Processing stops the first time a callback returns true. An empty iterator will return false.
+* filter(callback) - invokes the callback for each item in the iterator. The callback receives the current value of the iterator, the index of the value, and a reference to the iterator itself. This method returns an array of values for each value that the callback returned true.
+* map(callback) - invokes the callback for each item in the iterator. The callback receives the current value of the iterator, the index of the value, and a reference to the iterator itself. This method returns an array of values with each value being the return value of the callback.
+* reduce(callback, start) - invokes the callback for each item in the iterator. The callback receives the accumulator, the current value of the iterator, the index of the value, and a reference to the iterator itself. If the optional "start" value is supplied, the first two values will be "start" and the first value in the iterator. If "start" is not defined, then the first two values will be the first two values in the iterator. Returns the accumulated value after repeatedly applying the callback to all items in the iterator.
 
 All sub-classes of Iterator include the following convenience methods too:
 
